@@ -1,0 +1,24 @@
+<div class="fondo">
+    <div class="sobre">
+        <div class="card form">
+            <div style="box-sizing: border-box; margin-bottom: 20px;" class="etiquetaM">
+                Iniciar Sesión
+            </div>
+            <form [formGroup]="login" (ngSubmit)="IniciarSesion()">
+                <div class="form-group mb-3">
+                    <label for="email" class="etiqueta">Correo Electrónico:</label>
+                    <input type="email" class="form-control" formControlName="email" placeholder="ejemplo@prueba.com" [class.is-invalid]="CorreoNoValido">
+                    <small *ngIf="CorreoNoValido" class="text-danger">Valor invalido o Vacío</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="pwd" class="etiqueta">Contraseña:</label>
+                    <input type="password" class="form-control" formControlName="password" placeholder="*******" [class.is-invalid]="PassNoValido">
+                    <small *ngIf="PassNoValido" class="text-danger">Ingrese al menos 7 caracteres </small>
+                </div>
+                <div class="form-group mt-5">
+                    <button type="submit" class="btn btn-dark btn-login" [disabled]="!login.get('email').valid">Iniciar Sesión</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

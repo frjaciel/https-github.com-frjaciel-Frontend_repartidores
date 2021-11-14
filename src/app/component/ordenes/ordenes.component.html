@@ -1,0 +1,114 @@
+<section>
+    <div class="titulos">
+        <h4 class="masthead-heading text-uppercase  mb-0">Realiza tus pedidos</h4>
+    </div>
+
+    <select class="form-select tipoOrdenes" aria-label="Default select example" [(ngModel)]="datoSelecionado" (change)="capturar()">
+        <option *ngFor="let categoria of categoriaOrdenes" [value]="categoria.idCatOrden">{{categoria.nomCatOrden}}</option>
+    </select>
+    <div class="detalleOrdenes">
+        <div *ngIf="datoSelecionado== '01'">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Ubicacion</th>
+                        <th scope="col">Contacto</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Detalle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ordenPendiente of ordenesPendientes">
+                        <td>{{ordenPendiente.nombreCliente}}</td>
+                        <td>{{ordenPendiente.ubicacion}}</td>
+                        <td>{{ordenPendiente.contacto}}</td>
+                        <td>{{ordenPendiente.descripcion}}</td>
+                        <button class="btn">Tomar Orden</button>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="detalleOrdenes">
+        <div *ngIf="datoSelecionado== '02'">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Ubicacion</th>
+                        <th scope="col">Contacto</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Detalle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ordenEntregar of ordenesEntregar">
+                        <td>{{ordenEntregar.nombreCliente}}</td>
+                        <td>{{ordenEntregar.ubicacion}}</td>
+                        <td>{{ordenEntregar.contacto}}</td>
+                        <td>{{ordenEntregar.descripcion}}</td>
+                        <button class="btn" data-bs-toggle="modal" data-bs-target="#detalleModal">Estado</button>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="detalleOrdenes">
+        <div *ngIf="datoSelecionado== '03'">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Ubicacion</th>
+                        <th scope="col">Contacto</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Detalle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ordenFinalizada of ordenesFinalizadas">
+                        <td>{{ordenFinalizada.nombreCliente}}</td>
+                        <td>{{ordenFinalizada.ubicacion}}</td>
+                        <td>{{ordenFinalizada.contacto}}</td>
+                        <td>{{ordenFinalizada.descripcion}}</td>
+                        <button class="btn">Detalle</button>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Modal Estado de orden de ejemplo NO ESTA COMPLETADA-->
+    <div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #FE5755;">
+                    <h5 class="modal-title" id="detalleModalLabel">Descripcion Orden NO ESTA COMPLETADO</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" *ngFor="let ordenEntregar of ordenesEntregar">
+                    <div>
+                        <label>Cliente: </label>
+                        <p>{{ordenEntregar.nombreCliente}}</p>
+                        <label>Ubicacion: </label>
+                        <p>{{ordenEntregar.ubicacion}}</p>
+                        <label>Contacto: </label>
+                        <p>{{ordenEntregar.contacto}}</p>
+                    </div>
+                    <div>
+                        <label>Descripcion de la orden: </label>
+                        <p>{{ordenEntregar.descripcion}}</p>
+                        <label>Detalle Factura: </label>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ipsam provident dignissimos aperiam, asperiores temporibus dolores ea incidunt voluptates in!</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-estados">Tomada</button>
+                    <button class="btn-estados">En el lugar </button>
+                    <button class="btn-estados">En camino </button>
+                    <button class="btn-estados">En el Destino </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

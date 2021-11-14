@@ -1,0 +1,16 @@
+.principal {
+    padding: 0;
+    margin: 57px 0px 0px 0px !important;
+    width: 100%;
+    box-sizing: border-box;
+    height: 100vh;
+}
+
+.navbar {
+    background-color: #654878!important;
+    height: 57px;
+}
+
+.container-fluid {
+    background-color: #654878!important;
+}

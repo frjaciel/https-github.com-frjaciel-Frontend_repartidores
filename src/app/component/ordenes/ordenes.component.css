@@ -1,0 +1,47 @@
+.titulos {
+    background-color: #FE5755;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    width: 40%;
+    color: white;
+    height: 60px;
+    align-items: center;
+}
+
+section {
+    margin-top: 100px;
+}
+
+.tipoOrdenes {
+    width: 200px!important;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+.detalleOrdenes {
+    margin-top: 100px;
+    width: 100%;
+}
+
+thead {
+    background-color: #FE5755;
+}
+
+table .btn {
+    margin: 5px;
+    background-color: #FE5755!important;
+    font-size: x-small;
+    color: white;
+    border-radius: 30px;
+}
+
+.btn-estados {
+    background-color: #654878;
+    margin: 5px;
+    font-size: medium;
+    color: white;
+    border-radius: 30px;
+}

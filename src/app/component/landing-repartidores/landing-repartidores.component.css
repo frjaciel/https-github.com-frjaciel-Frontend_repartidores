@@ -1,0 +1,25 @@
+@media only screen and (max-width: 500px) {
+    .imagenInicio {
+        display: none !important;
+    }
+}
+
+.principal {
+    /*height: 500px;*/
+    margin-bottom: 0px;
+}
+
+.regis {
+    background-color: #654878;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.regis a {
+    font-size: xx-large;
+    color: beige!important;
+    background-color: #FE5755;
+    border-radius: 15px;
+}

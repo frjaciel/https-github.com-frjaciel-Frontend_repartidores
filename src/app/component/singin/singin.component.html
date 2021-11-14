@@ -1,0 +1,60 @@
+<div class="fondo">
+    <div class="sobre">
+        <div class="card form">
+            <div style="box-sizing: border-box; margin-bottom: 20px;" class="etiquetaM">
+                Registrar
+            </div>
+            <form [formGroup]="singin" (ngSubmit)="Registrar()">
+                <div class="form-group mb-3">
+                    <label for="nombre" class="etiqueta">Nombre Completo:</label>
+                    <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre" [class.is-invalid]="NombreNovalido">
+                    <small *ngIf="NombreNovalido" class="text-danger">Valor invalido o Vacío</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="dni" class="etiqueta">Numero de DNI:</label>
+                    <input type="text" class="form-control" formControlName="dni" placeholder="0801-1990-00447" [class.is-invalid]="DniNoValido">
+                    <small *ngIf="DniNoValido" class="text-danger">Valor invalido o Vacío</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="nacionalidad" class="etiqueta">Nacionalidad:</label><br>
+                    <select class="form-control">
+                        <option *ngFor="let pais of paises; let i = index">{{pais.nombrePais}}</option>
+                    </select>
+                    <!--<input type="text" class="form-control" formControlName="nacionalidad" placeholder="Hondureña" [class.is-invalid]="NacionalidadNoValido">-->
+                    <small *ngIf="NacionalidadNoValido" class="text-danger">Valor invalido o Vacío</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="ciudad" class="etiqueta">Ciudad:</label><br>
+                    <select class="form-control">
+                        <option *ngFor="let ciudad of ciudades; let i = index">{{ciudad.nombreCiudad}}</option>
+                    </select>
+                    <!--<input type="text" class="form-control" formControlName="nacionalidad" placeholder="Hondureña" [class.is-invalid]="NacionalidadNoValido">-->
+                    <small *ngIf="CiudadNoValido" class="text-danger">Valor invalido o Vacío</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="email" class="etiqueta">Correo Electrónico:</label>
+                    <input type="email" class="form-control" formControlName="email" placeholder="ejemplo@prueba.com" [class.is-invalid]="CorreoNoValido">
+                    <small *ngIf="CorreoNoValido" class="text-danger">Valor invalido o Vacío</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="numberPhone" class="etiqueta">Numero de celular:</label>
+                    <input type="tel" class="form-control" formControlName="numberPhone" placeholder="8984-5895" [class.is-invalid]="numberPhoneNoValido">
+                    <small *ngIf="numberPhoneNoValido" class="text-danger">Valor invalido o Vacío</small>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="pwd" class="etiqueta">Contraseña:</label>
+                    <input type="password" class="form-control" formControlName="password" placeholder="*******" [class.is-invalid]="PassNoValido">
+                    <small *ngIf="PassNoValido" class="text-danger">Debe contener al menos un número, un simbolo y una letra mayúscula y minúscula, y al menos 8 caracteres o más </small>
+                </div>
+                <div class="form-group">
+                    <label for="pwd" class="etiqueta">Confirme Contraseña:</label>
+                    <input type="password" class="form-control" formControlName="Confpassword" placeholder="*******" [class.is-invalid]="NoSonIguales">
+                    <small *ngIf="NoSonIguales" class="text-danger">Las contraseñas no coinciden</small>
+                </div>
+                <div class="form-group mt-5">
+                    <button type="submit" class="btn btn-dark btn-login" [disabled]="!singin.get('email').valid">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

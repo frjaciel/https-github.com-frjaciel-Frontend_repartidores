@@ -1,0 +1,12 @@
+body {
+    /*background-color: #654878!important;*/
+}
+
+.colorflecha {
+    background-color: rgba(0, 0, 0, 0.295)!important;
+    width: 50px!important;
+}
+
+.carouselExampleControls {
+    height: 50%!important;
+}
