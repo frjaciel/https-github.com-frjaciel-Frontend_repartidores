@@ -1,6 +1,6 @@
 <section>
     <div class="titulos">
-        <h4 class="masthead-heading text-uppercase  mb-0">Realiza tus pedidos</h4>
+        <h4 class="masthead-heading text-uppercase  mb-0">Ordenes</h4>
     </div>
 
     <select class="form-select tipoOrdenes" aria-label="Default select example" [(ngModel)]="datoSelecionado" (change)="capturar()">
@@ -72,34 +72,35 @@
                         <td>{{ordenFinalizada.ubicacion}}</td>
                         <td>{{ordenFinalizada.contacto}}</td>
                         <td>{{ordenFinalizada.descripcion}}</td>
-                        <button class="btn">Detalle</button>
+                        <button class="btn" data-bs-toggle="modal" data-bs-target="#detalleFinalizadoModal">Estado</button>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <!-- Modal Estado de orden de ejemplo NO ESTA COMPLETADA-->
+    <!-- Modal Estado de orden -->
     <div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #FE5755;">
-                    <h5 class="modal-title" id="detalleModalLabel">Descripcion Orden NO ESTA COMPLETADO</h5>
+                    <h5 class="modal-title" id="detalleModalLabel">Descripcion Orden</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" *ngFor="let ordenEntregar of ordenesEntregar">
-                    <div>
+                <div class="modal-body detalleOrden" *ngFor="let ordenEntregar of ordenesEntregar">
+                    <div id="panelOrden1">
                         <label>Cliente: </label>
-                        <p>{{ordenEntregar.nombreCliente}}</p>
+                        <p>{{ordenEntregar.nombreCliente}} Amaya amador</p>
                         <label>Ubicacion: </label>
-                        <p>{{ordenEntregar.ubicacion}}</p>
+                        <p>{{ordenEntregar.ubicacion}} Distrito cental Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, pariatur!</p>
                         <label>Contacto: </label>
                         <p>{{ordenEntregar.contacto}}</p>
                     </div>
-                    <div>
+                    <div id="panelOrden2">
                         <label>Descripcion de la orden: </label>
                         <p>{{ordenEntregar.descripcion}}</p>
                         <label>Detalle Factura: </label>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ipsam provident dignissimos aperiam, asperiores temporibus dolores ea incidunt voluptates in!</p>
+                        <p>- Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                        <p>- Numquam ipsam provident dignissimos aperiam, asperiores temporibus dolores ea incidunt voluptates in!</p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -107,6 +108,38 @@
                     <button class="btn-estados">En el lugar </button>
                     <button class="btn-estados">En camino </button>
                     <button class="btn-estados">En el Destino </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Estado de orden finalizada -->
+    <div class="modal fade" id="detalleFinalizadoModal" tabindex="-1" aria-labelledby="detalleFinalizadoModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #FE5755;">
+                    <h5 class="modal-title" id="detalleFinalizadoModal">Descripcion Orden</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body detalleOrden" *ngFor="let ordenEntregar of ordenesEntregar">
+                    <div id="panelOrden1">
+                        <label>Cliente: </label>
+                        <p>{{ordenEntregar.nombreCliente}} Amaya amador</p>
+                        <label>Ubicacion: </label>
+                        <p>{{ordenEntregar.ubicacion}} Distrito cental Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, pariatur!</p>
+                        <label>Contacto: </label>
+                        <p>{{ordenEntregar.contacto}}</p>
+                    </div>
+                    <div id="panelOrden2">
+                        <label>Descripcion de la orden: </label>
+                        <p>{{ordenEntregar.descripcion}}</p>
+                        <label>Detalle Factura: </label>
+                        <p>- Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                        <p>- Numquam ipsam provident dignissimos aperiam, asperiores temporibus dolores ea incidunt voluptates in!</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
                 </div>
             </div>
         </div>

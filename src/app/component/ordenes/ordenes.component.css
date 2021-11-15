@@ -45,3 +45,24 @@ table .btn {
     color: white;
     border-radius: 30px;
 }
+
+.detalleOrden {
+    display: flex;
+    margin: 30px;
+}
+
+.detalleOrden label {
+    font-weight: bold;
+}
+
+.detalleOrden #panelOrden2 {
+    width: 50%;
+    margin-left: auto;
+    padding: 10px;
+}
+
+.detalleOrden #panelOrden1 {
+    width: 50%;
+    margin-right: auto;
+    padding: 10px;
+}
