@@ -18,6 +18,11 @@ export class OrdenesService {
     return this.httpClient.get(`http://localhost:8889/ordenes/${idEstado}`,{});
   }
 
+  //Obtener orden por ID
+  ordenId(idOrden):Observable<any>{
+    return this.httpClient.get(`http://localhost:8889/ordenes/${idOrden}/orden`, {});
+  }
+
   //Obtener ordenes de un usuario
   obteneOrdenesUsuario(idUsuario: string):Observable<any>{
     return this.httpClient.get(`http://localhost:8889/ordenes/${idUsuario}/usuarios`,{});

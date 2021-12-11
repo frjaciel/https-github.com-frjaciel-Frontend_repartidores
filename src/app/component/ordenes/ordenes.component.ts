@@ -8,6 +8,7 @@ import { OrdenesService } from 'src/app/services/ordenes.service';
 })
 export class OrdenesComponent implements OnInit {
   estadoOrdenes: any= [];
+  ordenUnica: any= [];
   /*categoriaOrdenes: any= [
     {
       idCatOrden: '01',
@@ -135,6 +136,15 @@ export class OrdenesComponent implements OnInit {
     location.reload();
   }
   
+  obtenerOrden(idOrden){
+    this.ordenesService.ordenId(idOrden).subscribe(
+      res=>{
+        this.ordenUnica= res;
+        console.log('Orden unica: ', this.ordenUnica)
+      },
+      error=>console.log(error)  
+    )
+  }
  /* ordenUsuario(){
     for(let i=0;i<this.clientes.length; i++){
       this.ordenesService.obteneOrdenesUsuario(this.clientes[i]._id).subscribe(
