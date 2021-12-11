@@ -66,3 +66,8 @@ table .btn {
     margin-right: auto;
     padding: 10px;
 }
+
+#entregadas td{
+    font-style: italic;
+    color: gray;
+}

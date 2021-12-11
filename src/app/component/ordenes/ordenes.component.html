@@ -3,11 +3,11 @@
         <h4 class="masthead-heading text-uppercase  mb-0">Ordenes</h4>
     </div>
 
-    <select class="form-select tipoOrdenes" aria-label="Default select example" [(ngModel)]="datoSelecionado" (change)="capturar()">
-        <option *ngFor="let categoria of categoriaOrdenes" [value]="categoria.idCatOrden">{{categoria.nomCatOrden}}</option>
+    <select class="form-select tipoOrdenes" aria-label="Default select example" [(ngModel)]="datoSelecionado" (change)="capturar()" (change)="obtenerOrdenes()">
+        <option *ngFor="let estado of estadoOrdenes" [value]="estado._id">{{estado.nombre}}</option>
     </select>
     <div class="detalleOrdenes">
-        <div *ngIf="datoSelecionado== '01'">
+        <div *ngIf="datoSelecionado== '61b2c418f8ed6e8b150d2d38'">
             <table class="table">
                 <thead>
                     <tr>
@@ -19,19 +19,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let ordenPendiente of ordenesPendientes">
-                        <td>{{ordenPendiente.nombreCliente}}</td>
-                        <td>{{ordenPendiente.ubicacion}}</td>
-                        <td>{{ordenPendiente.contacto}}</td>
-                        <td>{{ordenPendiente.descripcion}}</td>
-                        <button class="btn">Tomar Orden</button>
+                    <tr *ngFor="let orden of ordenes">
+                        <td>{{orden.nombre}}</td>
+                        <td>{{orden.ubicacion}}</td>
+                        <td>{{orden.numberPhone}}</td>
+                        <td>
+                            <div *ngFor="let producto of orden.productos"><b>Producto:</b> {{producto.nombreProducto}} || <b>tienda:</b> {{producto.tienda}} || <b>cantidad:</b> {{producto.cantidad}} || <b>desripcion:</b> {{producto.descripcion}} </div>
+                        </td>
+                        <button class="btn" (click)= "cambiarEstado(datoSelecionado, orden._id)">Tomar Orden</button>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <div class="detalleOrdenes">
-        <div *ngIf="datoSelecionado== '02'">
+        <div *ngIf="datoSelecionado== '61b2c418f8ed6e8b150d2d39'">
             <table class="table">
                 <thead>
                     <tr>
@@ -43,11 +45,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let ordenEntregar of ordenesEntregar">
-                        <td>{{ordenEntregar.nombreCliente}}</td>
+                    <tr *ngFor="let ordenEntregar of ordenes">
+                        <td >{{ordenEntregar.nombre}}</td>
                         <td>{{ordenEntregar.ubicacion}}</td>
-                        <td>{{ordenEntregar.contacto}}</td>
-                        <td>{{ordenEntregar.descripcion}}</td>
+                        <td>{{ordenEntregar.numberPhone}}</td>
+                        <td>
+                            <div *ngFor="let producto of ordenEntregar.productos"><b>Producto:</b> {{producto.nombreProducto}} || <b>tienda:</b> {{producto.tienda}} || <b>cantidad:</b> {{producto.cantidad}} || <b>desripcion:</b> {{producto.descripcion}} </div>
+                        </td>
                         <button class="btn" data-bs-toggle="modal" data-bs-target="#detalleModal">Estado</button>
                     </tr>
                 </tbody>
@@ -55,8 +59,8 @@
         </div>
     </div>
     <div class="detalleOrdenes">
-        <div *ngIf="datoSelecionado== '03'">
-            <table class="table">
+        <div *ngIf="datoSelecionado== '61b2c418f8ed6e8b150d2d3a'">
+            <table class="table" id="entregadas">
                 <thead>
                     <tr>
                         <th scope="col">Cliente</th>
@@ -67,17 +71,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let ordenFinalizada of ordenesFinalizadas">
-                        <td>{{ordenFinalizada.nombreCliente}}</td>
-                        <td>{{ordenFinalizada.ubicacion}}</td>
-                        <td>{{ordenFinalizada.contacto}}</td>
-                        <td>{{ordenFinalizada.descripcion}}</td>
+                    <tr *ngFor="let ordenEntregadas of ordenes">
+                        <td >{{ordenEntregadas.nombre}}</td>
+                        <td>{{ordenEntregadas.ubicacion}}</td>
+                        <td>{{ordenEntregadas.numberPhone}}</td>
+                        <td>
+                            <div *ngFor="let producto of ordenEntregadas.productos"><b>Producto:</b> {{producto.nombreProducto}} || <b>tienda:</b> {{producto.tienda}} || <b>cantidad:</b> {{producto.cantidad}} || <b>desripcion:</b> {{producto.descripcion}} </div>
+                        </td>
                         <button class="btn" data-bs-toggle="modal" data-bs-target="#detalleFinalizadoModal">Estado</button>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+
+
     <!-- Modal Estado de orden -->
     <div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
