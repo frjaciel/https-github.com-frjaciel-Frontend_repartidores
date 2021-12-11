@@ -132,7 +132,6 @@ export class OrdenesComponent implements OnInit {
       },
       error=>console.log(error)
     )
-    
     location.reload();
   }
   

@@ -89,33 +89,35 @@
     <!-- Modal Estado de orden -->
     <div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content" *ngFor="let ordenEntrega of ordenes">
                 <div class="modal-header" style="background-color: #FE5755;">
                     <h5 class="modal-title" id="detalleModalLabel">Descripcion Orden</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body detalleOrden" *ngFor="let ordenEntregar of ordenesEntregar">
+                <div class="modal-body detalleOrden" >
                     <div id="panelOrden1">
                         <label>Cliente: </label>
-                        <p>{{ordenEntregar.nombreCliente}} Amaya amador</p>
+                        <p>{{ordenEntrega.nombre}}</p>
                         <label>Ubicacion: </label>
-                        <p>{{ordenEntregar.ubicacion}} Distrito cental Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, pariatur!</p>
+                        <p>{{ordenEntrega.ubicacion}}</p>
                         <label>Contacto: </label>
-                        <p>{{ordenEntregar.contacto}}</p>
+                        <p>{{ordenEntrega.numberPhone}}</p>
                     </div>
-                    <div id="panelOrden2">
+                    <div id="panelOrden2" *ngFor="let producto of ordenEntrega.productos">
                         <label>Descripcion de la orden: </label>
-                        <p>{{ordenEntregar.descripcion}}</p>
+                        <p>{{producto.nombreProducto}}</p>
                         <label>Detalle Factura: </label>
-                        <p>- Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        <p>- Numquam ipsam provident dignissimos aperiam, asperiores temporibus dolores ea incidunt voluptates in!</p>
+                        <p>- {{producto.tienda}}</p>
+                        <p>-L. {{producto.precio}}</p>
+                        <p>- {{producto.cantidad}}</p>
+                        <p>- {{producto.descripcion}}</p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn-estados">Tomada</button>
                     <button class="btn-estados">En el lugar </button>
                     <button class="btn-estados">En camino </button>
-                    <button class="btn-estados">En el Destino </button>
+                    <button class="btn-estados" (click)= "cambiarEstado(datoSelecionado, ordenEntrega._id)">En el Destino </button>
                 </div>
             </div>
         </div>
