@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -10,7 +10,8 @@ import { LoginService } from "../../services/login.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  @Output() onUsuario= new EventEmitter();
+  usuario: any=[];
   login: FormGroup;
   email: string;
 
@@ -31,11 +32,11 @@ export class LoginComponent implements OnInit {
   get PassNoValido(){
     return this.login.get('password').invalid && this.login.get('password').touched;
   }
-
+  
   FormLogin(){
     this.login = this.fb.group({
-      email: ['Yozabeth@unah.hn', [Validators.required, Validators.pattern('[\\w\\.-]*[a-zA-Z0-9_]@[\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]')]],
-      password: ['Yocza3007@', [Validators.required, Validators.minLength(7)]]
+      email: ['motorista@gmail.com', [Validators.required, Validators.pattern('[\\w\\.-]*[a-zA-Z0-9_]@[\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]')]],
+      password: ['Asd.1234', [Validators.required, Validators.minLength(7)]]
     });
   }
 
@@ -53,11 +54,15 @@ export class LoginComponent implements OnInit {
 
       Swal.showLoading();
 
-      this.loginServ.Registrar(this.login.value)
+      this.loginServ.IniciarSesion(this.login.value)
       .subscribe(resp => {
         Swal.close();
-        this.loginServ.permiso$.emit('true');
-        this.loginServ.email$.emit(resp.email);
+        this.usuario = resp;
+        //localStorage.setItem('idUsuario', usuario[0]._id);
+        //this.loginServ.permiso$.emit('true');
+        //this.loginServ.email$.emit(usuario[0].email);
+        console.log('User logueado', this.usuario);
+        localStorage.setItem("dato", JSON.stringify(this.usuario));
         this.router.navigate(['Ordenes']);
       }, (err) => {
         Swal.fire({
@@ -68,7 +73,8 @@ export class LoginComponent implements OnInit {
       });
   
     }
-  }  
+  }
+
   /*
   IniciarSesion(){
     if (this.login.invalid) {

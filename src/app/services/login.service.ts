@@ -30,13 +30,12 @@ export class LoginService {
 
   constructor(protected http: HttpClient) { }
 
-  IniciarSesion( usuario: UsuarioModel, getTockend: boolean){
+  IniciarSesion( usuario: UsuarioModel ){
     const AutData = {
-      ...usuario,
-      returnSecureToken: getTockend
+      ...usuario
     };
 
-    return this.http.get('http://127.0.0.1:8889/usuarios/login/' + AutData.email + '/' + AutData.password )
+    return this.http.get('http://localhost:8889/usuarios/login/' + AutData.email + '/' + AutData.password )
     .pipe(
       map (resp => {
         return resp;
@@ -49,7 +48,7 @@ export class LoginService {
     const AutData = {
       ...usuario
     };
-    return this.http.post('http://127.0.0.1:8889/usuarios/', AutData).pipe(
+    return this.http.post('http://localhost:8889/usuarios/', AutData).pipe(
       map((resp: any) => {
         return resp;
       })
@@ -104,4 +103,3 @@ export interface Permiso{
   id: number;
   nombre: string;
 }
-
