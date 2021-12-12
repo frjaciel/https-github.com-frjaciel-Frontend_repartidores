@@ -12,7 +12,7 @@ declare var jQuery: any;
 export class AppComponent implements OnInit {
   localStorage = window.localStorage;
 
-  datosUsuario=  JSON.parse(localStorage.getItem('._id'));
+  //datosUsuario=  JSON.parse(localStorage.getItem('._id'));
   title = 'frontend';
 
   constructor() {

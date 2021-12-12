@@ -33,10 +33,13 @@ export class OrdenesService {
     return this.httpClient.get(`http://localhost:8889/usuarios`);
   }
 
-  cambiarEstadoOrden(idorden, nuevoEstado):Observable<any>{
+  cambiarEstadoOrden(idorden, nuevoEstado, idMotrista, nombreMotorista, telefonoMotorista):Observable<any>{
     return this.httpClient.put(`http://localhost:8889/ordenes/${idorden}`,
     {
-      estado: nuevoEstado
+      estado: nuevoEstado,
+      idMotorista: idMotrista,
+      nombreMotorista: nombreMotorista,
+      telefono: telefonoMotorista
     }
     )
   }
@@ -44,7 +47,8 @@ export class OrdenesService {
   statusOrden(idOrden, statusNew):Observable<any>{
     return this.httpClient.put(`http://localhost:8889/ordenes/${idOrden}/status`,
     {
-      status: statusNew
+      status: statusNew,
+      
     });
   }
 

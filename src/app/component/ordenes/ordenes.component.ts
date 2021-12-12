@@ -10,6 +10,7 @@ import { FormControl, FormGroup } from '@angular/forms'
 export class OrdenesComponent implements OnInit {
   estadoOrdenes: any= [];
   ordenUnica: any= [];
+  ordenesRepartidor: any=[];
   //status: String;
   
   st1= "Tomada";
@@ -23,13 +24,26 @@ export class OrdenesComponent implements OnInit {
   dataUser: any=[];
 
   datoSelecionado: string= '';
-
+  datosUsuario: any;
   
+  idMotorista: any;
+  nombreMotorista: any;
+  telefonoMotorista: any;
+
   constructor(private ordenesService: OrdenesService) { }
 
   ngOnInit(): void {
     this.obtenerTipoOrdenes();
     this.obtenerUsuarios();
+    setTimeout(() => {
+      this.datosUsuario=  JSON.parse(localStorage.getItem('dato'));
+      console.log('DAtos de usuario', this.datosUsuario[0]._id);
+      this.idMotorista= this.datosUsuario[0]._id;
+      this.nombreMotorista  = this.datosUsuario[0].nombre;
+      this.telefonoMotorista= this.datosUsuario[0].numberPhone;
+    }, 1000);
+    
+    
   }
   
   capturar(){
@@ -83,7 +97,7 @@ export class OrdenesComponent implements OnInit {
     else if(estado=='61b2c418f8ed6e8b150d2d39'){
       nuevoEstado= '61b2c418f8ed6e8b150d2d3a';//Entregada
     }
-    this.ordenesService.cambiarEstadoOrden(idorden, nuevoEstado).subscribe(
+    this.ordenesService.cambiarEstadoOrden(idorden, nuevoEstado, this.idMotorista, this.nombreMotorista, this.telefonoMotorista).subscribe(
       res=>{
         //this.ordenes= res;
         console.log('ordenes modificadas: ', nuevoEstado, '-> ');
@@ -115,6 +129,16 @@ export class OrdenesComponent implements OnInit {
     )
   }
  
+  //Obtener Ordenes del motorista
+  ordenesMotorista(){
+    this.ordenesService.obteneOrdenesUsuario(this.idMotorista).subscribe(
+      res=>{
+        this.ordenesRepartidor= res;
+        console.log('Ordenes del repartidor', this.ordenesRepartidor)
+      },
+      error=>console.log(error)
+    )
+  }
   
   //boton de cambiar Status
   tomada= false;
