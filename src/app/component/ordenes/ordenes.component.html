@@ -78,7 +78,7 @@
                         <td>
                             <div *ngFor="let producto of ordenEntregadas.productos"><b>Producto:</b> {{producto.nombreProducto}} || <b>tienda:</b> {{producto.tienda}} || <b>cantidad:</b> {{producto.cantidad}} || <b>desripcion:</b> {{producto.descripcion}} </div>
                         </td>
-                        <button class="btn" data-bs-toggle="modal" data-bs-target="#detalleFinalizadoModal">Estado</button>
+                        <button class="btn" data-bs-toggle="modal" data-bs-target="#detalleFinalizadoModal" (click)= "obtenerOrden(ordenEntregadas._id)">Estado</button>
                     </tr>
                 </tbody>
             </table>
@@ -114,10 +114,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn-estados">Tomada</button>
-                    <button class="btn-estados">En el lugar </button>
-                    <button class="btn-estados">En camino </button>
-                    <button class="btn-estados" (click)= "cambiarEstado(datoSelecionado, ordenEntrega._id)">En el Destino </button>
+                    <button name= "tomada" class="btn-estados" (click)= "cambiarStatus(ordenEntrega._id, st1)">Tomada</button>
+                    <button name= "lugar" class="btn-estados"  (click)= "cambiarStatus(ordenEntrega._id, st2)">En el lugar </button>
+                    <button name= "camino" class="btn-estados" (click)= "cambiarStatus(ordenEntrega._id, st3)">En camino </button>
+                    <button name= "destino" class="btn-estados" (click)= "cambiarEstado(datoSelecionado, ordenEntrega._id)">En el Destino </button>
                 </div>
             </div>
         </div>
@@ -126,26 +126,28 @@
     <!-- Modal Estado de orden finalizada -->
     <div class="modal fade" id="detalleFinalizadoModal" tabindex="-1" aria-labelledby="detalleFinalizadoModal" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content"  *ngFor="let ordenEntregada of ordenUnica">
                 <div class="modal-header" style="background-color: #FE5755;">
                     <h5 class="modal-title" id="detalleFinalizadoModal">Descripcion Orden</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body detalleOrden" *ngFor="let ordenEntregar of ordenesEntregar">
+                <div class="modal-body detalleOrden" >
                     <div id="panelOrden1">
                         <label>Cliente: </label>
-                        <p>{{ordenEntregar.nombreCliente}} Amaya amador</p>
+                        <p>{{ordenEntregada.nombre}}</p>
                         <label>Ubicacion: </label>
-                        <p>{{ordenEntregar.ubicacion}} Distrito cental Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, pariatur!</p>
+                        <p>{{ordenEntregada.ubicacion}}</p>
                         <label>Contacto: </label>
-                        <p>{{ordenEntregar.contacto}}</p>
+                        <p>{{ordenEntregada.numberPhone}}</p>
                     </div>
-                    <div id="panelOrden2">
+                    <div id="panelOrden2" *ngFor="let producto of ordenEntregada.productos">
                         <label>Descripcion de la orden: </label>
-                        <p>{{ordenEntregar.descripcion}}</p>
+                        <p>{{producto.nombreProducto}}</p>
                         <label>Detalle Factura: </label>
-                        <p>- Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        <p>- Numquam ipsam provident dignissimos aperiam, asperiores temporibus dolores ea incidunt voluptates in!</p>
+                        <p>- {{producto.tienda}}</p>
+                        <p>- L. {{producto.precio}}</p>
+                        <p>- {{producto.cantidad}}</p>
+                        <p>- {{producto.descripcion}}</p>
                     </div>
                 </div>
                 <div class="modal-footer">

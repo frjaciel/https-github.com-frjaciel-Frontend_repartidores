@@ -71,3 +71,11 @@ table .btn {
     font-style: italic;
     color: gray;
 }
+
+.botonSecuencia{
+    background-color: #FE5755;
+    margin: 5px;
+    font-size: medium;
+    color: white;
+    border-radius: 30px;
+}

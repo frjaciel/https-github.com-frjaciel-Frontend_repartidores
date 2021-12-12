@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { LoginService } from "../../services/login.service";
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,11 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
 
   login: FormGroup;
+  email: string;
 
   constructor(  private fb: FormBuilder,
-                private router: Router ) {
+                private router: Router,
+                private loginServ: LoginService ) {
     this.FormLogin();
    
   }
@@ -47,10 +50,42 @@ export class LoginComponent implements OnInit {
         icon: 'info',
         text: 'Espere por favor...'
       });
+
+      Swal.showLoading();
+
+      this.loginServ.Registrar(this.login.value)
+      .subscribe(resp => {
+        Swal.close();
+        this.loginServ.permiso$.emit('true');
+        this.loginServ.email$.emit(resp.email);
+        this.router.navigate(['Ordenes']);
+      }, (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al autenticar',
+          text: err.message
+        });
+      });
+  
+    }
+  }  
+  /*
+  IniciarSesion(){
+    if (this.login.invalid) {
+      return Object.values(this.login.controls).forEach(control => {
+        control.markAsTouched();
+      });
+    }else{
+      Swal.fire({
+        allowOutsideClick: false,
+        icon: 'info',
+        text: 'Espere por favor...'
+      });
       
       this.router.navigate(['Ordenes']);
     
     }
   }
+  */
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdenesService } from 'src/app/services/ordenes.service';
+import { FormControl, FormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-ordenes',
@@ -9,61 +10,17 @@ import { OrdenesService } from 'src/app/services/ordenes.service';
 export class OrdenesComponent implements OnInit {
   estadoOrdenes: any= [];
   ordenUnica: any= [];
-  /*categoriaOrdenes: any= [
-    {
-      idCatOrden: '01',
-      nomCatOrden: 'Disponibles'
-    },
-    {
-      idCatOrden: '02',
-      nomCatOrden: 'A entregar'
-    },
-    {
-      idCatOrden: '03',
-      nomCatOrden: 'Entregadas'
-    },
-  ];*/
+  //status: String;
+  
+  st1= "Tomada";
+  st2= "En el Lugar";
+  st3= "En el Camino";
+  st4= "En el Destino";
+  
   usuarios: any= [];
   clientes: any=[];
   ordenes: any= [];
   dataUser: any=[];
-    
-  ordenPendientes:any =[
-    {
-      idCliente: '01',
-      nombreCliente: 'Ramon',
-      ubicacion: 'Tegucigalpa',
-      contacto: '3333-6666',
-      descripcion: 'Esta es la descripcion ' 
-    },
-    {
-      idCliente: '02',
-      nombreCliente: 'Jose',
-      ubicacion: 'Tegucigalpa',
-      contacto: '3333-6666',
-      descripcion: 'Esta es la descripcion ' 
-    },
-  ];
-
-  ordenesEntregar: any= [
-    {
-      idCliente: '01',
-      nombreCliente: 'Ramon',
-      ubicacion: 'Tegucigalpa',
-      contacto: '3333-6666',
-      descripcion: 'Esta es la descripcion ' 
-    },
-  ];
-
-  ordenesFinalizadas: any= [
-    {
-      idCliente: '06',
-      nombreCliente: 'Juan Carlos Garcia',
-      ubicacion: 'Tegucigalpa',
-      contacto: '3333-6666',
-      descripcion: 'Esta es la descripcion ' 
-    },
-  ];
 
   datoSelecionado: string= '';
 
@@ -129,13 +86,25 @@ export class OrdenesComponent implements OnInit {
     this.ordenesService.cambiarEstadoOrden(idorden, nuevoEstado).subscribe(
       res=>{
         //this.ordenes= res;
-        console.log('ordenes modificadas: ', nuevoEstado, '-> ')
+        console.log('ordenes modificadas: ', nuevoEstado, '-> ');
+        this.cambiarStatus(idorden, this.st4);
       },
       error=>console.log(error)
     )
     location.reload();
   }
   
+  //cambiar el estatus de la orden (tomada, en camino, en el destino, etc)
+  cambiarStatus(idOrden, estatus){
+    this.ordenesService.statusOrden(idOrden, estatus).subscribe(
+      res=>{
+        console.log('Status modificado: ', res);
+      },
+      error=>console.log(error)
+    )
+
+  }
+
   obtenerOrden(idOrden){
     this.ordenesService.ordenId(idOrden).subscribe(
       res=>{
@@ -145,20 +114,11 @@ export class OrdenesComponent implements OnInit {
       error=>console.log(error)  
     )
   }
- /* ordenUsuario(){
-    for(let i=0;i<this.clientes.length; i++){
-      this.ordenesService.obteneOrdenesUsuario(this.clientes[i]._id).subscribe(
-        res=>{
-          this.dataUser= [
-            this.clientes[i]._id,
-            this.clientes[i].nombre,
-            this.clientes[i].numberPhone,
-            res
-          ];
-        console.log('data usuario', this.dataUser);
-        },
-        error=>console.log(error)
-        )
-    }
-  }*/
+ 
+  
+  //boton de cambiar Status
+  tomada= false;
+  cambiarApariencia(){
+    this.tomada= !this.tomada;
+  }
 }

@@ -41,4 +41,11 @@ export class OrdenesService {
     )
   }
 
+  statusOrden(idOrden, statusNew):Observable<any>{
+    return this.httpClient.put(`http://localhost:8889/ordenes/${idOrden}/status`,
+    {
+      status: statusNew
+    });
+  }
+
 }
